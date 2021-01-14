@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.JS - Primeiros passos</title>
+    <meta name="theme-color" content="#ffffff">
+    <meta name="author" content="Rafael Marques">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container" id="app">
+        <div class="row mt-5">
+            <div class="col-12 border-bottom mb-5 d-flex justify-content-between align-items-center">
+                <h2>{{name}}</h2>
+                <p>{{contactsCount}}</p>
+            </div>
+
+            <div class="col-4">
+                <form action="">
+                    <div class="form-group mr-1 mb-3">
+                        <label>Nome</label>
+                        <input type="text" class="form-control" placeholder="Nome completo..." v-model="contact.name">
+                    </div>
+
+                    <div class="form-group mr-1 mb-3">
+                        <label>Email</label>
+                        <input type="email" class="form-control" placeholder="Seu melhor email..."
+                            v-model="contact.email">
+                    </div>
+
+                    <div class="form-group mr-1 mb-3">
+                        <label>Contato</label>
+                        <input type="phone" class="form-control" placeholder="Seu telefone..." v-model="contact.phone">
+                    </div>
+
+                    <div class="form-group ml-1">
+                        <button v-if="!isEdit" class="btn btn-lg btn-rounded btn-success"
+                            v-on:click.prevent="saveContact(contact)">Criar contato</button>
+                        </button>
+
+                        <button v-if="isEdit" class="btn btn-lg btn-rounded btn-primary"
+                            v-on:click.prevent="updateContact(contact)">Atualizar contato</button>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-8 border-left">
+                <div class="contact" v-if="contacts.length">
+                    <div class="col-12 mb-2" v-for="contact in contacts">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{contact.name}}</h5>
+                                <p class="card-text">
+                                    {{contact.email}}, {{contact.phone}}
+                                </p>
+
+                                <a href="" class="btn btn-sm btn-primary"
+                                    @click.prevent="editContact(contact)">Editar</a>
+                                <a href="" class="btn btn-sm btn-danger"
+                                    @click.prevent="removeContact(contact.id)">Apagar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div v-else>Nenhum contato encontrado!</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    <script src="vue.js"></script>
+</body>
+
+</html>
